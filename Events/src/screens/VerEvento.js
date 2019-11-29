@@ -28,7 +28,7 @@ const VerEvento = ({ navigation }) => {
     }
 
     async function _setContent() {
-        Clipboard.setString(`https://backevents.onrender.com/api/accept/${dadosEvento._id}`);
+        Clipboard.setString(dadosEvento._id);
         alert('Copiado para seu Clipboard!');
     }
     async function getGuests() {
@@ -48,7 +48,6 @@ const VerEvento = ({ navigation }) => {
     let confirmados = `Convidados confirmados: ${dadosEvento.guests.length}`;
     return (
         <>
-        
             <Page >
                 <Card title={dadosEvento.name}>
                     <View style={{ fontSize: 50 }}>
@@ -73,7 +72,7 @@ const VerEvento = ({ navigation }) => {
                         <View style={{ flexDirection: 'column' }}>
                             <View >
                                 <View>
-                                    <Text>https://backevents.onrender.com/api/accept/{dadosEvento._id}</Text>
+                                    <Text>{dadosEvento._id}</Text>
                                 </View>
                                 <View>
                                     <TouchableOpacity onPress={() => _setContent()}>
@@ -100,7 +99,7 @@ const VerEvento = ({ navigation }) => {
                     </View>
                 </Card>
             </Page>
-        
+
         </>
     );
 }
