@@ -5,13 +5,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import Axios from 'axios';
 
-//import fundoImg from '../images/fundo.jpg';
+import fundoImg from '../images/fundo.jpg';
 
 const Page = styled.SafeAreaView`
     flex:1;
     justifyContent: center;
     align-items: center;
     position: absolute;
+ 
 `;
 const Prot = styled.SafeAreaView`
 background-color: white;
@@ -19,6 +20,7 @@ flex:1;
 justifyContent: center;
 align-items: center;
 margin-left: 12px;
+borderRadius: 80;
 `;
 const Input = styled.TextInput`
     fontSize:15;
@@ -41,14 +43,14 @@ const Btntexto = styled.Text`
 	color: white;
     text-align: center;
     font-weight: bold;
-    `;    
+    `;
 const Title = styled.Text`
     padding: 20px;
 	font-size: 18px;
 	font-weight: bold;
 	color: red;
 `;
-const Titulo = styled.Text`
+const Title2 = styled.Text`
     padding: 20px;
 	font-size: 18px;
 	font-weight: bold;
@@ -66,16 +68,7 @@ const Login = (props) => {
     function cadastro() {
         props.navigation.navigate('Cadastro');
     }
-    useEffect(() => {
-        function confereLogin() {
-            if (AsyncStorage.getItem('@token_event')) {
-                props.navigation.navigate('Dashboard');
-            } else {
 
-            }
-        }
-        confereLogin()
-    }, [])
     async function logar() {
         if (!email || !senha) {
             alert('Preencha todos os campos!');
@@ -96,17 +89,17 @@ const Login = (props) => {
     }
     return (
         <Fundo source={require('../images/fundo.jpg')}>
-        <Page>
-            <Image
-            style={{ width: 150, height: 150, margin: 30 }}
-            source={{ uri: 'https://i.ibb.co/R7KkgMj/logo.png' }}/>
-            <Prot>
-            <Input value={email} onChangeText={e => setEmail(e)} placeholder="E-mail" placeholderTextColor="dimgray" />
-            <Input value={senha} onChangeText={e => setSenha(e)} placeholder="Password" placeholderTextColor="dimgray" />
-            <Botao onPress={() => logar()} ><Btntexto>Conectar</Btntexto></Botao>
-            <Titulo>Não é cadastrado?<Title onPress={() => cadastro()}> Registre-se!</Title></Titulo>
-            </Prot>
-        </Page>
+            <Page>
+                <Image
+                    style={{ width: 150, height: 150, margin: 30 }}
+                    source={{ uri: 'https://i.ibb.co/R7KkgMj/logo.png' }} />
+                <Prot>
+                    <Input value={email} onChangeText={e => setEmail(e)} placeholder="E-mail" placeholderTextColor="dimgray" />
+                    <Input value={senha} onChangeText={e => setSenha(e)} placeholder="Password" placeholderTextColor="dimgray" />
+                    <Botao onPress={() => logar()} ><Btntexto>Conectar</Btntexto></Botao>
+                    <Title onPress={() => cadastro()}><Title2>Não é cadastrado? </Title2>Registre-se!</Title>
+                </Prot>
+            </Page>
         </Fundo>
     );
 }
@@ -114,17 +107,17 @@ const Login = (props) => {
 Login.navigationOptions = () => {
     return {
         title: 'E V E N T S',
-        
-        headerTitleStyle: { 
-            textAlign:"center", 
-            flex:1, 
+
+        headerTitleStyle: {
+            textAlign: "center",
+            flex: 1,
         },
-          headerStyle: {
-              backgroundColor: 'white',
-              
-          },
-          headerTintColor: 'red',
-    }           
+        headerStyle: {
+            backgroundColor: 'black',
+
+        },
+        headerTintColor: '#white',
+    }
 
 }
 export default Login;

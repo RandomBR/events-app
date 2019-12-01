@@ -5,22 +5,46 @@ import AsyncStorage from '@react-native-community/async-storage';
 import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
 import api from '../services/api';
+
 const Page = styled.SafeAreaView`
     flex:1;
     justifyContent:center;
     align-items:center;
-    background-color:#343a40;
+    background-color:transparent;
 `;
 const TxtInput = styled.TextInput`
 backgroundColor:white;
-width:250;
+width:280;
 height:50;
+margin-left: 20px;
 border-radius: 10px;
+justify-content: center;
+align-items: center;
+`;
+const Fundo = styled.ImageBackground`
+      flex: 1;
 `;
 const Span = styled.Text`
 color:white;
-font-size:30px
+font-size:20px;
+padding-top: 15px;
+padding-bottom: 5px;
+margin-left: 20px;
 `;
+const Botao = styled.TouchableOpacity`
+height: 40px;
+margin-top: 12px;
+border-radius: 10;    
+background-color:#B22222;
+justify-content: center;
+align-items: center;
+`;
+const Btntexto = styled.Text`
+	font-size: 15px;
+	color: white;
+    text-align: center;
+    font-weight: bold;
+    `;
 let data = new Date();
 // Fri Nov 16 2018 18:36:40 GMT-0200 (Horário de Verão de Brasília)
 
@@ -47,6 +71,8 @@ const FormCadEvento = (props) => {
         if (!name || !local || !limit || !start || !end) {
             alert('Preencha todos os campos!');
         } else {
+            console.log(start)
+            console.log(end)
             const dataInicio = moment(start).format();
             const dataFim = moment(end).format();
             await api.post('/event', {
@@ -65,14 +91,16 @@ const FormCadEvento = (props) => {
             })
                 .then(function (response) {
                     console.log(response)
-                    alert(`https://backevents.onrender.com/api/accept/${response.data.event._id}`)
+                    alert('Evento criado com sucesso!')
+                    props.navigation.navigate('Criar')
                 }).catch(function (error) {
                     console.log(error);
                 });
         }
 
     }
-    return (
+    return ( 
+    <Fundo source={require('../images/fundo4.jpg')}>
         <Page>
             <View>
                 <Span>Nome do evento:</Span>
@@ -84,11 +112,11 @@ const FormCadEvento = (props) => {
                 <Span>Data e hora de início</Span>
                 <DatePicker
                     style={{ width: 300 }}
-                    date={end}
+                    date={start}
+                    is24Hour={true}
                     mode="datetime"
                     placeholder="Selecione o começo"
-                    format="YYYY-MM-DD HH:MM"
-                    minDate="03-11-2019"
+                    format="YYYY-MM-DD HH:mm"
                     confirmBtnText="Confirma"
                     cancelBtnText="Cancela"
                     customStyles={{
@@ -103,16 +131,16 @@ const FormCadEvento = (props) => {
                         }
                         // ... You can check the source to find the other keys.
                     }}
-                    onDateChange={(end) => { setEnd(end) }}
+                    onDateChange={(end) => { setStart(end) }}
                 />
                 <Span>Data e hora final</Span>
                 <DatePicker
-                    style={{ width: 300 }}
-                    date={start}
+                    style={{ width: 300}}
+                    date={end}
                     mode="datetime"
+                    is24Hour={true}
                     placeholder="Selecione o final"
-                    format="YYYY-MM-DDTHH:MM"
-                    minDate="03-11-2019"
+                    format="YYYY-MM-DD HH:mm"
                     confirmBtnText="Confirma"
                     cancelBtnText="Cancela"
                     customStyles={{
@@ -124,28 +152,27 @@ const FormCadEvento = (props) => {
                         },
                         dateInput: {
                             marginLeft: 36
+                            
                         }
                     }}
-                    onDateChange={(date) => { setStart(date) }}
+                    onDateChange={(date) => { setEnd(date) }}
                 />
-                <Button title="Cadastrar evento" onPress={cadastrarEvento} />
+                <Botao onPress={cadastrarEvento}><Btntexto>Cadastrar evento</Btntexto></Botao>
 
             </View>
 
         </Page>
+
+    </Fundo>
     );
+    
 }
 
-FormCadEvento.navigationOptions = () => {
-    return {
-        header: null,
-        headerMode: 'none',
 
-    }
-}
 export default FormCadEvento;
 
 {/* <Span>Data e hora de início</Span>
+    <Button title="Cadastrar evento" onPress={cadastrarEvento} />
 <DatePicker
     style={{ width: 300 }}
     date={end}

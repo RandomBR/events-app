@@ -6,32 +6,32 @@ import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import moment from 'moment';
 import { Card, Avatar, Badge, Icon } from 'react-native-elements'
-
-const Fundo = styled.ImageBackground`
-    flex:1;
-`;
 const Page = styled.SafeAreaView`
        flex:1;
+       
+`;
 
-`;
-const Botao = styled.TouchableOpacity`
+const ButtonContainer = styled.TouchableOpacity`
 	width: 300px;
-	height: 40px;
+	height: 40px
 	padding: 12px;
-    border-radius: 10;	
-    background-color: #B22222;
-    justifyContent: center;
+    border-radius: 10px;	
+    left:10px;
+    background-color: ${props => props.backgroundColor};
+    justify-content: center;
     align-items: center;
 `;
-const Prot = styled.View`
-    flex:1;
-    justifyContent: center;
-    align-items: center;
-`;
+
 const ButtonText = styled.Text`
 	font-size: 15px;
 	color: ${props => props.textColor};
-	text-align: center;
+    text-align: center;
+    font-weight: bold;
+`;
+
+const Fundo = styled.ImageBackground`
+      flex: 1;
+
 `;
 const users = [
     {
@@ -87,15 +87,16 @@ const Criar = (props) => {
     });
     return (
         <>
-        <Fundo source={require('../images/fundo2.jpg')}>
+        <Fundo source={require('../images/fundo4.jpg')}>
             <Page >
-                <Prot style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
-                    <Botao onPress={() => formCadEvento()}  >
+            
+                <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
+                    <ButtonContainer backgroundColor="#B22222" onPress={() => formCadEvento()}  >
                         <ButtonText textColor="white">Criar evento</ButtonText>
-                    </Botao>
-                </Prot>
-                <View style={{ flex: 7, top: 10, }}>
-                    <Card title="Meus eventos:" style={{Color: '#B22222'}}>
+                    </ButtonContainer>
+                </View>
+                <View style={{ flex: 7, top: 10 }}>
+                    <Card title="Meus eventos:"  titleStyle={{color: "white", fontSize: 20}} containerStyle={{backgroundColor:"#B22222", textColor:"white", borderRadius: 5 }}>
                         {
                             events.map((u, i) => {
                                 return (
@@ -110,8 +111,9 @@ const Criar = (props) => {
                         }
                     </Card>
                 </View>
+               
             </Page>
-        </Fundo>
+            </Fundo>
         </>
     );
 }
@@ -135,10 +137,4 @@ const styles = StyleSheet.create({
         fontSize: 15,
     },
 });
-Criar.navigationOptions = () => {
-    return {
-        header: null,
-        headerMode: 'none'
-    }
-}
 export default Criar;

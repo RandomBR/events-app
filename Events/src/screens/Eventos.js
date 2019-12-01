@@ -6,11 +6,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import moment from 'moment';
 import { Card, Avatar, Badge, Icon } from 'react-native-elements'
+
 const Page = styled.SafeAreaView`
        flex:1;
-       background-color:#343a40;
+       background-color:transparent;
 `;
-
+const Fundo = styled.ImageBackground`
+      flex: 1;
+`;
 const ButtonContainer = styled.TouchableOpacity`
 	width: 300px;
 	height: 40px
@@ -78,10 +81,11 @@ const Eventos = (props) => {
         getMyEvents()
     });
     return (
-        <>
+    <>
+        <Fundo source={require('../images/fundo4.jpg')}>
             <Page >
                 <View style={{ flex: 7, top: 20 }}>
-                    <Card title="Próximos eventos:">
+                    <Card title="Próximos eventos:" titleStyle={{color: "white", fontSize: 20}} containerStyle={{backgroundColor:"#B22222", textColor:"white", borderRadius: 5 }}>
                         {
                             events.map((u, i) => {
                                 return (
@@ -97,8 +101,8 @@ const Eventos = (props) => {
                     </Card>
                 </View>
             </Page>
-
-        </>
+        </Fundo>
+    </>
     );
 }
 const CustomBadge = (props) => {
@@ -123,8 +127,18 @@ const styles = StyleSheet.create({
 });
 Eventos.navigationOptions = () => {
     return {
-        header: null,
-        headerMode: 'none'
+        title: 'E V E N T S',
+/*
+        headerTitleStyle: {
+            textAlign: "center",
+            flex: 1,
+        },
+        headerStyle: {
+            backgroundColor: 'black',
+
+        },
+        headerTintColor: '#white', */
     }
+
 }
 export default Eventos;

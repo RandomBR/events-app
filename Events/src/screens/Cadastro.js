@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Button } from 'react-native';
+import { Button, Image } from 'react-native';
 import styled from 'styled-components/native';
 import AsyncStorage from '@react-native-community/async-storage';
 import api from '../services/api';
 import Axios from 'axios';
+import fundoImg from '../images/fundo.jpg';
 
 const Page = styled.SafeAreaView`
     flex:1;
     justifyContent: center;
     align-items: center;
+    position: absolute;
+
 `;
-const Title = styled.Text`
-	font-size: 30px;
-    margin-bottom: 10px;
-    font-weight: bold;
-	color: red;
+const Prot = styled.SafeAreaView`
+    background-color: white;
+    flex:1;
+    justifyContent: center;
+    align-items: center;
+    margin-left: 50px;
+    borderRadius: 70;
+    width: 99%;
 `;
 const Input = styled.TextInput`
     fontSize:15;
-    border-width: 1;
-    border-radius: 10;
+    borderBottomWidth: 1;
     width:200px;
     height:50px;
     margin:10px;
-    background-color:white;
 `;
 const Botao = styled.TouchableOpacity`
     width: 200px;
@@ -39,9 +43,17 @@ const Btntexto = styled.Text`
 	color: white;
     text-align: center;
     font-weight: bold;
-    `;    
-    const Fundo = styled.ImageBackground`
-    flex: 1;
+    `;
+const Title = styled.Text`
+    padding: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	color: red;
+`;
+const Fundo = styled.ImageBackground`
+      flex: 1;
+      width: 590px;
+
 `;
 
 const Cadastro = (props) => {
@@ -70,35 +82,38 @@ const Cadastro = (props) => {
     }
 
     return (
+
         <Fundo source={require('../images/fundo.jpg')}>
-        <Page>
-        <Title>C A D A S T R O</Title> 
-            <Input value={email} onChangeText={e => setEmail(e)} placeholder="Email" />
-            <Input value={nome} onChangeText={e => setNome(e)} placeholder="Nome" />
-            <Input value={senha} onChangeText={e => setSenha(e)} placeholder="Senha" />
-            <Input value={telefone} onChangeText={e => setTelefone(e)} placeholder="Telefone" />
-            <Botao onPress={() => cadastrar()} ><Btntexto>Cadastrar</Btntexto></Botao>
-        </Page>
+            <Page>
+                <Image
+                    style={{ width: 150, height: 150, marginLeft: 30, marginTop: 20 }}
+                    source={{ uri: 'https://i.ibb.co/R7KkgMj/logo.png' }} />
+                <Prot>
+
+                    <Input value={email} onChangeText={e => setEmail(e)} placeholder="Email" placeholderTextColor="dimgray" />
+                    <Input value={nome} onChangeText={e => setNome(e)} placeholder="Nome" placeholderTextColor="dimgray" />
+                    <Input value={senha} onChangeText={e => setSenha(e)} placeholder="Senha" placeholderTextColor="dimgray" />
+                    <Input value={telefone} onChangeText={e => setTelefone(e)} placeholder="Telefone" placeholderTextColor="dimgray" />
+                    <Botao onPress={() => cadastrar()} ><Btntexto>Cadastrar!</Btntexto></Botao>
+                </Prot>
+            </Page>
         </Fundo>
     );
 }
-
 Cadastro.navigationOptions = () => {
     return {
-   
-            title: '',
-            
-            headerTitleStyle: { 
-                textAlign:"center", 
-                flex:1, 
-            },
-              headerStyle: {
-                  backgroundColor: 'white',
-                  
-              },
-              headerTintColor: 'red',
-              fontWeight: 'bold'
-        }           
-    
+        title: 'C A D A S T R O',
+
+        headerTitleStyle: {
+            textAlign: "center",
+            flex: 1,
+        },
+        headerStyle: {
+            backgroundColor: 'black',
+
+        },
+        headerTintColor: '#white',
     }
+
+}
 export default Cadastro;
