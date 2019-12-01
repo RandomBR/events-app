@@ -12,7 +12,7 @@ const Page = styled.SafeAreaView`
     justifyContent: center;
     align-items: center;
     position: absolute;
-    margin:20px;
+ 
 `;
 const Prot = styled.SafeAreaView`
 background-color: white;
@@ -20,6 +20,7 @@ flex:1;
 justifyContent: center;
 align-items: center;
 margin-left: 12px;
+borderRadius: 80;
 `;
 const Input = styled.TextInput`
     fontSize:15;
@@ -49,6 +50,12 @@ const Title = styled.Text`
 	font-weight: bold;
 	color: red;
 `;
+const Title2 = styled.Text`
+    padding: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	color: black;
+`;
 const Fundo = styled.ImageBackground`
       flex: 1;
       width: 590px;
@@ -61,15 +68,25 @@ const Login = (props) => {
     function cadastro() {
         props.navigation.navigate('Cadastro');
     }
+    useEffect(() => {
+        function confereLogin() {
+            if (AsyncStorage.getItem('@token_event')) {
+                props.navigation.navigate('Dashboard');
+            } else {
+
+            }
+        }
+        confereLogin()
+    }, [])
     async function logar() {
         if (!email || !senha) {
             alert('Preencha todos os campos!');
         } else {
             const response = api.post('/auth', { email, password: senha }).then(
                 function (response) {
-                    AsyncStorage.setItem('@token_event', response.data.token)
-                    AsyncStorage.setItem('@id', response.data.user._id)
-                    AsyncStorage.setItem('@nome', response.data.user.name)
+                    //AsyncStorage.setItem('@token_event', response.data.token)
+                    //AsyncStorage.setItem('@id', response.data.user._id)
+                    //AsyncStorage.setItem('@nome', response.data.user.name)
                     props.navigation.navigate('Dashboard');
                 }
             );
@@ -89,7 +106,7 @@ const Login = (props) => {
                     <Input value={email} onChangeText={e => setEmail(e)} placeholder="E-mail" placeholderTextColor="dimgray" />
                     <Input value={senha} onChangeText={e => setSenha(e)} placeholder="Password" placeholderTextColor="dimgray" />
                     <Botao onPress={() => logar()} ><Btntexto>Conectar</Btntexto></Botao>
-                    <Title onPress={() => cadastro()}>Não é cadastrado? Registre-se!</Title>
+                    <Title onPress={() => cadastro()}><Title2>Não é cadastrado? </Title2>Registre-se!</Title>
                 </Prot>
             </Page>
         </Fundo>

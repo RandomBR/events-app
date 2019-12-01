@@ -10,11 +10,14 @@ const Page = styled.SafeAreaView`
     flex:1;
     justifyContent: center;
     align-items: center;
-    background-color:#DF4723;
+    background-color:#B22222;
     
 `;
+const Fundo = styled.ImageBackground`
+      flex: 1;
+`;
 const Prot = styled.SafeAreaView`
-background-color: #DF4723;
+background-color: white;
 flex:1;
 justifyContent: center;
 align-items: center;
@@ -34,7 +37,7 @@ const Botao = styled.TouchableOpacity`
     height: 40px;
     padding: 12px;
     border-radius: 10;    
-    background-color:#343a40;
+    background-color:#B22222;
     margin: 10px;
     margin-bottom: 2px;
 `;
@@ -58,9 +61,9 @@ const MinhaConta = (props) => {
     const [token_event, setToken_event] = useState('');
     const [id, setId] = useState('');
 
-    AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
+    //AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
     async function getUser() {
         try {
            await api.get("/user", {
@@ -83,22 +86,24 @@ const MinhaConta = (props) => {
         getUser()
     });
     return (
+        <Fundo source={require('../images/fundo3.jpg')}>
         <Page>
             <Prot>
                 <TouchableHighlight onPress={() => { alert('Troca de foto de perfil') }}>
                     <View style={{ width: 100, height: 100, flexDirection: 'row', margin: 24, borderRadius: 10 }}>
                         <Image
-                            resizeMode='contain'
-                            style={{ width: 100, height: 100, position: 'absolute', backgroundColor: '#DF4723' }}
+                            //resizeMode='contain'
+                            style={{ width: 100, height: 100, position: 'absolute', backgroundColor: '#B22222', borderRadius: 60 }}
                             source={{ uri: 'https://icon-library.net/images/profile-png-icon/profile-png-icon-1.jpg' }}
                         />
                     </View>
                 </TouchableHighlight>
-                <Input value={user.name} onChangeText={e => setName(e)} placeholderTextColor="dimgray" />
-                <Input value={user.phone} onChangeText={e => setPhone(e)} placeholderTextColor="dimgray" keyboardType="numeric" />
+                <Input value={user.name} onChangeText={e => setName(e)} placeholder="Novo username" placeholderTextColor="dimgray" />
+                <Input value={user.phone} onChangeText={e => setPhone(e)} placeholder="Nono telefone" placeholderTextColor="dimgray" keyboardType="numeric" />
                 <Botao onPress={() => handlerEdit()} ><Btntexto>Alterar</Btntexto></Botao>
             </Prot>
         </Page>
+        </Fundo>
     );
 }
 

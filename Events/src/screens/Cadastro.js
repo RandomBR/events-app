@@ -11,14 +11,16 @@ const Page = styled.SafeAreaView`
     justifyContent: center;
     align-items: center;
     position: absolute;
-    margin:50px;
+
 `;
 const Prot = styled.SafeAreaView`
-background-color: white;
-flex:1;
-justifyContent: center;
-align-items: center;
-margin-left: 12px;
+    background-color: white;
+    flex:1;
+    justifyContent: center;
+    align-items: center;
+    margin-left: 50px;
+    borderRadius: 70;
+    width: 99%;
 `;
 const Input = styled.TextInput`
     fontSize:15;
@@ -84,7 +86,7 @@ const Cadastro = (props) => {
         <Fundo source={require('../images/fundo.jpg')}>
             <Page>
                 <Image
-                    style={{ width: 150, height: 150, margin: 30 }}
+                    style={{ width: 150, height: 150, marginLeft: 30, marginTop: 20 }}
                     source={{ uri: 'https://i.ibb.co/R7KkgMj/logo.png' }} />
                 <Prot>
 

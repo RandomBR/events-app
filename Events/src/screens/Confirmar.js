@@ -10,33 +10,34 @@ const Page = styled.SafeAreaView`
     flex:1;
     justifyContent: center;
     align-items: center;
-    background-color:#DF4723;
+    background-color:#B22222;
     
 `;
 const Prot = styled.SafeAreaView`
-background-color: #DF4723;
-flex:1;
-justifyContent: center;
-align-items: center;
-margin-left:60px;
-margin-right:50px;
+    background-color: white;
+    flex:1;
+    justifyContent: center;
+    align-items: center;
+    margin-left:60px;
+    margin-right:60px;
+
 `;
 const Input = styled.TextInput`
     fontSize:15;
     borderBottomWidth: 1;
     width:200px;
     height:50px;
-    margin:10px;
-    color:white;
+    margin:8px;
+    color:black;
     `;
 const Botao = styled.TouchableOpacity`
     width: 200px;
     height: 40px;
-    padding: 12px;
     border-radius: 10;    
-    background-color:#343a40;
-    margin: 10px;
-    margin-bottom: 2px;
+    background-color:#B22222;
+    margin-top: 15px;
+    justify-content: center;
+    align-items: center;
 `;
 const Btntexto = styled.Text`
 	font-size: 15px;
@@ -50,6 +51,11 @@ const Title = styled.Text`
 	font-weight: bold;
 	color: red;
 `;
+const Texto = styled.Text`
+    font-weight: bold;
+    font-size: 15px;
+
+`;
 const Confirmar = (props) => {
     const [status, setStatus] = useState('');
     const [nome, setNome] = useState('');
@@ -57,9 +63,9 @@ const Confirmar = (props) => {
     const [token_event, setToken_event] = useState('');
     const [id, setId] = useState('');
 
-    AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
+    //AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
     function accept() {
         try {
             fetch("https://backevents.onrender.com/api/accept", {
@@ -94,7 +100,7 @@ const Confirmar = (props) => {
     return (
         <Page>
             <Prot>
-                <Text>Insira o código do evento:</Text>
+                <Texto>Insira o código do evento:</Texto>
                 <Input onChangeText={e => setLink(e)} placeholderTextColor="dimgray" />
                 <Botao onPress={() => accept()} ><Btntexto>Confirmar</Btntexto></Botao>
             </Prot>

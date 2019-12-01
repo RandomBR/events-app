@@ -16,15 +16,20 @@ const Title = styled.Text`
 	font-weight: 600;
 	color: #DF4723;
 `;
+const Fundo = styled.ImageBackground`
+      flex: 1;
+      width: 590px;
+
+`;
 const Dashboard = (props) => {
 
     const [nome, setNome] = useState('')
     const [token_event, setToken_event] = useState('')
     const [id, setId] = useState('')
 
-    AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
+    //AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
     function criar() {
         props.navigation.navigate('Criar');
     }
@@ -41,9 +46,9 @@ const Dashboard = (props) => {
     function confirmar() {
         props.navigation.navigate('Confirmar')
     }
-    AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
+    //AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
 
     useEffect(() => {
 
@@ -52,21 +57,21 @@ const Dashboard = (props) => {
     }, []);
 
     return (
-        <Grid style={{ backgroundColor: '#343a40' }}>
-
+        <Grid /*style={{ backgroundColor: '#343a40' }}*/>
+    <Fundo source={require('../images/fundo4.jpg')}>
             <Row >
-                <Col style={{ left: 10 }}>
-                    <Row style={{ alignItems: 'center' }}>
+                <Col style={{ left: 5 }}>
+                    <Row style={{ alignItems: 'center', marginTop: 20 }}>
                         <View style={{ flex: 1 }}>
-                            <TouchableHighlight onPress={() => { criar() }}>
-                                <View style={{ width: 150, height: 150, flexDirection: 'row', }}>
+                            <TouchableHighlight onPress={() => { criar() }} style={{ width: 170, height: 170, borderRadius: 10}}>
+                                <View style={{ width: 150, height: 150, flexDirection: 'row' }}>
                                     <Image
 
-                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#DF4723' }}
+                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#B22222', borderRadius: 10 }}
                                         source={{ uri: 'https://static.thenounproject.com/png/232752-200.png' }}
                                     />
-                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end' }}>
-                                        <Text style={{ color: 'white', fontSize: 20, }}>Meus eventos</Text>
+                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end', borderRadius: 10 }}>
+                                        <Text style={{ color: 'white', fontSize: 20, textAlign: 'center'}}>Meus eventos</Text>
                                     </View>
                                 </View>
                             </TouchableHighlight>
@@ -74,15 +79,15 @@ const Dashboard = (props) => {
                     </Row>
                     <Row style={{ alignItems: 'center' }}>
                         <View style={{ flex: 1 }}>
-                            <TouchableHighlight onPress={() => { Eventos() }}>
-                                <View style={{ width: 150, height: 150, flexDirection: 'row', borderRadius: 10 }}>
+                            <TouchableHighlight onPress={() => { Eventos() }} style={{ width: 170, height: 170, borderRadius: 10}}>
+                                <View style={{ width: 150, height: 150, flexDirection: 'row' }}>
                                     <Image
-                                        resizeMode='contain'
-                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#DF4723' }}
+                                        //resizeMode='contain'
+                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#B22222', borderRadius: 10 }}
                                         source={{ uri: 'https://carlisletheacarlisletheatre.org/images/party-png-icon-5.png' }}
                                     />
-                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end' }}>
-                                        <Text style={{ color: 'white', fontSize: 20, }}>Próximos eventos</Text>
+                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end', borderRadius: 10 }}>
+                                        <Text style={{ color: 'white', fontSize: 20, textAlign: 'center'}}>Próximos eventos</Text>
                                     </View>
                                 </View>
                             </TouchableHighlight>
@@ -90,49 +95,49 @@ const Dashboard = (props) => {
                     </Row>
                     <Row style={{ alignItems: 'center' }} size={1}>
                         <View style={{ flex: 1 }}>
-                            <TouchableHighlight onPress={() => { Sair() }}>
-                                <View style={{ width: 150, height: 150, flexDirection: 'row', borderRadius: 10 }}>
+                            <TouchableHighlight onPress={() => { Sair() }} style={{ width: 170, height: 170, borderRadius: 10}}>
+                                <View style={{ width: 150, height: 150, flexDirection: 'row' }}>
                                     <Image
-                                        resizeMode='contain'
-                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#DF4723' }}
+                                        //resizeMode='contain'
+                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#B22222', borderRadius: 10 }}
                                         source={{ uri: 'https://icon-library.net/images/logout-icon-png/logout-icon-png-26.jpg' }}
                                     />
-                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end' }}>
-                                        <Text style={{ color: 'white', fontSize: 20, }}>Sair</Text>
+                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end', borderRadius: 10 }}>
+                                        <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}>Sair</Text>
                                     </View>
                                 </View>
                             </TouchableHighlight>
                         </View>
                     </Row>
                 </Col>
-                <Col style={{ left: 10 }}>
-                    <Row style={{ alignItems: 'center' }}>
+                <Col style={{ left: 6 }}>
+                    <Row style={{ alignItems: 'center', marginTop: 70 }}>
                         <View style={{ flex: 1 }}>
-                            <TouchableHighlight onPress={() => { MinhaConta() }}>
-                                <View style={{ width: 150, height: 150, flexDirection: 'row', borderRadius: 10 }}>
+                            <TouchableHighlight onPress={() => { MinhaConta() }} style={{ width: 170, height: 170, borderRadius: 10}}>
+                                <View style={{ width: 150, height: 150, flexDirection: 'row'  }}>
                                     <Image
-                                        resizeMode='contain'
-                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#DF4723' }}
+                                        //resizeMode='contain'
+                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#B22222', borderRadius: 10}}
                                         source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/6/6d/Windows_Settings_app_icon.png' }}
                                     />
-                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end' }}>
-                                        <Text style={{ color: 'white', fontSize: 20, }}>Minha conta</Text>
+                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end', borderRadius: 10 }}>
+                                        <Text style={{ color: 'white', fontSize: 20, textAlign: 'center'}}>Minha conta</Text>
                                     </View>
                                 </View>
                             </TouchableHighlight>
                         </View>
                     </Row>
-                    <Row style={{ alignItems: 'center' }}>
+                    <Row style={{ alignItems: 'center', marginBottom: 50 }}>
                         <View style={{ flex: 1 }}>
-                            <TouchableHighlight onPress={() => { confirmar() }}>
-                                <View style={{ width: 150, height: 150, flexDirection: 'row', borderRadius: 10 }}>
+                            <TouchableHighlight onPress={() => { confirmar() }} style={{ width: 170, height: 170, borderRadius: 10}}>
+                                <View style={{ width: 150, height: 150, flexDirection: 'row' }}>
                                     <Image
-                                        resizeMode='contain'
-                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#DF4723' }}
+                                        //resizeMode='contain'
+                                        style={{ width: 150, height: 150, position: 'absolute', backgroundColor: '#B22222', borderRadius: 10}}
                                         source={{ uri: 'http://simpleicon.com/wp-content/uploads/add-user.png' }}
                                     />
-                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end' }}>
-                                        <Text style={{ color: 'white', fontSize: 20, }}>Confirmar Evento</Text>
+                                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.5)', alignSelf: 'flex-end', borderRadius: 10 }}>
+                                        <Text style={{ color: 'white', fontSize: 20, textAlign: 'center' }}>Confirmar Evento</Text>
                                     </View>
                                 </View>
                             </TouchableHighlight>
@@ -140,7 +145,7 @@ const Dashboard = (props) => {
                     </Row>
                 </Col>
             </Row>
-
+            </Fundo>
         </Grid >
     );
 }

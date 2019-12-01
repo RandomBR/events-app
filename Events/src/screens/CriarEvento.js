@@ -8,7 +8,7 @@ import moment from 'moment';
 import { Card, Avatar, Badge, Icon } from 'react-native-elements'
 const Page = styled.SafeAreaView`
        flex:1;
-       background-color:#343a40;
+       
 `;
 
 const ButtonContainer = styled.TouchableOpacity`
@@ -16,15 +16,22 @@ const ButtonContainer = styled.TouchableOpacity`
 	height: 40px
 	padding: 12px;
     border-radius: 10px;	
-    left:30px;
-    right:30px;
-	background-color: ${props => props.backgroundColor};
+    left:10px;
+    background-color: ${props => props.backgroundColor};
+    justify-content: center;
+    align-items: center;
 `;
 
 const ButtonText = styled.Text`
 	font-size: 15px;
 	color: ${props => props.textColor};
-	text-align: center;
+    text-align: center;
+    font-weight: bold;
+`;
+
+const Fundo = styled.ImageBackground`
+      flex: 1;
+
 `;
 const users = [
     {
@@ -40,9 +47,9 @@ const Criar = (props) => {
     const [token_event, setToken_event] = useState();
     const [id, setId] = useState(0);
     const [events, setEvents] = useState([]);
-    AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
+    //AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
     function formCadEvento() {
         props.navigation.navigate('FormCadEvento')
     }
@@ -80,14 +87,16 @@ const Criar = (props) => {
     });
     return (
         <>
+        <Fundo source={require('../images/fundo4.jpg')}>
             <Page >
+            
                 <View style={{ flex: 1, flexDirection: 'row', marginTop: 10 }}>
-                    <ButtonContainer backgroundColor="#DF4723" onPress={() => formCadEvento()}  >
+                    <ButtonContainer backgroundColor="#B22222" onPress={() => formCadEvento()}  >
                         <ButtonText textColor="white">Criar evento</ButtonText>
                     </ButtonContainer>
                 </View>
                 <View style={{ flex: 7, top: 10 }}>
-                    <Card title="Meus eventos:">
+                    <Card title="Meus eventos:"  titleStyle={{color: "white", fontSize: 20}} containerStyle={{backgroundColor:"#B22222", textColor:"white", borderRadius: 5 }}>
                         {
                             events.map((u, i) => {
                                 return (
@@ -102,8 +111,9 @@ const Criar = (props) => {
                         }
                     </Card>
                 </View>
+               
             </Page>
-
+            </Fundo>
         </>
     );
 }

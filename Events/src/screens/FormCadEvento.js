@@ -5,22 +5,46 @@ import AsyncStorage from '@react-native-community/async-storage';
 import DatePicker from 'react-native-datepicker'
 import moment from 'moment';
 import api from '../services/api';
+
 const Page = styled.SafeAreaView`
     flex:1;
     justifyContent:center;
     align-items:center;
-    background-color:#343a40;
+    background-color:transparent;
 `;
 const TxtInput = styled.TextInput`
 backgroundColor:white;
-width:250;
+width:280;
 height:50;
+margin-left: 20px;
 border-radius: 10px;
+justify-content: center;
+align-items: center;
+`;
+const Fundo = styled.ImageBackground`
+      flex: 1;
 `;
 const Span = styled.Text`
 color:white;
-font-size:30px
+font-size:20px;
+padding-top: 15px;
+padding-bottom: 5px;
+margin-left: 20px;
 `;
+const Botao = styled.TouchableOpacity`
+height: 40px;
+margin-top: 12px;
+border-radius: 10;    
+background-color:#B22222;
+justify-content: center;
+align-items: center;
+`;
+const Btntexto = styled.Text`
+	font-size: 15px;
+	color: white;
+    text-align: center;
+    font-weight: bold;
+    `;
 let data = new Date();
 // Fri Nov 16 2018 18:36:40 GMT-0200 (Horário de Verão de Brasília)
 
@@ -40,9 +64,9 @@ const FormCadEvento = (props) => {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
     const [link, setLink] = useState('')
-    AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
-    AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
+    //AsyncStorage.getItem('@id').then((id) => { if (id !== null) { setId(id) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@token_event').then((token_event) => { if (token_event !== null) { setToken_event(token_event) } else { props.navigation.navigate('Login') } });;
+    //AsyncStorage.getItem('@nome').then((nome) => { if (nome !== null) { setNome(nome) } else { props.navigation.navigate('Login') } });
     async function cadastrarEvento() {
         if (!name || !local || !limit || !start || !end) {
             alert('Preencha todos os campos!');
@@ -75,7 +99,8 @@ const FormCadEvento = (props) => {
         }
 
     }
-    return (
+    return ( 
+    <Fundo source={require('../images/fundo4.jpg')}>
         <Page>
             <View>
                 <Span>Nome do evento:</Span>
@@ -110,7 +135,7 @@ const FormCadEvento = (props) => {
                 />
                 <Span>Data e hora final</Span>
                 <DatePicker
-                    style={{ width: 300 }}
+                    style={{ width: 300}}
                     date={end}
                     mode="datetime"
                     is24Hour={true}
@@ -127,22 +152,27 @@ const FormCadEvento = (props) => {
                         },
                         dateInput: {
                             marginLeft: 36
+                            
                         }
                     }}
                     onDateChange={(date) => { setEnd(date) }}
                 />
-                <Button title="Cadastrar evento" onPress={cadastrarEvento} />
+                <Botao onPress={cadastrarEvento}><Btntexto>Cadastrar evento</Btntexto></Botao>
 
             </View>
 
         </Page>
+
+    </Fundo>
     );
+    
 }
 
 
 export default FormCadEvento;
 
 {/* <Span>Data e hora de início</Span>
+    <Button title="Cadastrar evento" onPress={cadastrarEvento} />
 <DatePicker
     style={{ width: 300 }}
     date={end}
