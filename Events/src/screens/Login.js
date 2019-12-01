@@ -68,25 +68,16 @@ const Login = (props) => {
     function cadastro() {
         props.navigation.navigate('Cadastro');
     }
-    useEffect(() => {
-        function confereLogin() {
-            if (AsyncStorage.getItem('@token_event')) {
-                props.navigation.navigate('Dashboard');
-            } else {
 
-            }
-        }
-        confereLogin()
-    }, [])
     async function logar() {
         if (!email || !senha) {
             alert('Preencha todos os campos!');
         } else {
             const response = api.post('/auth', { email, password: senha }).then(
                 function (response) {
-                    //AsyncStorage.setItem('@token_event', response.data.token)
-                    //AsyncStorage.setItem('@id', response.data.user._id)
-                    //AsyncStorage.setItem('@nome', response.data.user.name)
+                    AsyncStorage.setItem('@token_event', response.data.token)
+                    AsyncStorage.setItem('@id', response.data.user._id)
+                    AsyncStorage.setItem('@nome', response.data.user.name)
                     props.navigation.navigate('Dashboard');
                 }
             );
